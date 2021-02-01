@@ -1,35 +1,36 @@
 package com.devsuperior.dsclients.resources;
 
-import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.devsuperior.dsclients.entities.Client;
+import com.devsuperior.dsclients.dto.ClientDTO;
+import com.devsuperior.dsclients.services.ClientService;
 
 @RestController
 @RequestMapping(value = "/clients")
 public class ClientResource {
 	
+	@Autowired
+	ClientService service;
+	
 	@GetMapping
-	public ResponseEntity<List<Client>> findAll(){
+	public ResponseEntity<List<ClientDTO>> findAll(){
 		
-		List<Client> list = new ArrayList<Client>();
-		
-		list.add(new Client(1L, "Maria", "10099009900", 1567.9, Instant.now(),1));
-		list.add(new Client(2L, "João", "1009906666900", 567.9, Instant.now(),4));
+		List<ClientDTO> list = service.findAll();
 		
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value = "/{id}")	
-	public ResponseEntity<Client> findById(@PathVariable Long id){
-		return ResponseEntity.ok().body(new Client(id, "Maria", "10099009900", 1567.9, Instant.now(),1));
+	public ResponseEntity<ClientDTO> findById(@PathVariable Long id){
+		ClientDTO client = service.findById(id);
+		return ResponseEntity.ok().body(client);
 	}
 	
 	
