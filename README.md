@@ -1,6 +1,6 @@
-Bootcamp DevSuperior 2.0
+#Bootcamp DevSuperior 2.0
 
-Trabalho final do capítulo 1: CRUD recurso de Clientes
+##Trabalho final do capítulo 1: CRUD recurso de Clientes
 
 Você deverá entregar um projeto Spring Boot 2.3.x contendo um CRUD completo de web services REST para acessar um recurso de clientes, contendo as cinco operações básicas aprendidas no capítulo:
 
@@ -14,6 +14,6 @@ O projeto deverá estar com um ambiente de testes configurado acessando o banco 
 
 Um cliente possui nome, CPF, renda, data de nascimento, e quantidade de filhos. A especificação da entidade Client é mostrada a seguir (você deve sequir à risca os nomes de classe e atributos mostrados no diagrama):
 
-[https://lh4.googleusercontent.com/BOot8W7LfYGYEP4DgYJHpqd3L_jRc891cD4tY-kvtfTmCX8IIvfJT_PdO9UdvP7XsPl1jmxaLa5q8-EIdwIfdVI2H_bSPRCCkaok1zASDtdZF-yBdw9boUylLTpAqF9dmdq3sdBX](https://lh4.googleusercontent.com/BOot8W7LfYGYEP4DgYJHpqd3L_jRc891cD4tY-kvtfTmCX8IIvfJT_PdO9UdvP7XsPl1jmxaLa5q8-EIdwIfdVI2H_bSPRCCkaok1zASDtdZF-yBdw9boUylLTpAqF9dmdq3sdBX)
+![Client Class](https://lh4.googleusercontent.com/BOot8W7LfYGYEP4DgYJHpqd3L_jRc891cD4tY-kvtfTmCX8IIvfJT_PdO9UdvP7XsPl1jmxaLa5q8-EIdwIfdVI2H_bSPRCCkaok1zASDtdZF-yBdw9boUylLTpAqF9dmdq3sdBX)
 
 Seu projeto deverá fazer um seed de pelo menos 10 clientes com dados SIGNIFICATIVOS (não é para usar dados sem significado como “Nome 1”, “Nome 2”, etc.).
