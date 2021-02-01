@@ -8,22 +8,26 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.dsclients.dto.ClientDTO;
 import com.devsuperior.dsclients.entities.Client;
 import com.devsuperior.dsclients.repository.ClientRepository;
+import com.devsuperior.dsclients.services.exceptions.DatabaseException;
 import com.devsuperior.dsclients.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ClientService {
 
+	private static final String DATABASE_EXCEPTION_MESSAGE = "Integrity Violation";
+	private static final String RESOURCE_NOT_FOUND_MESSAGE =  "Not Found! Id: ";
+	
 	@Autowired
 	ClientRepository repository;
-	
-	private final String RESOURCE_NOT_FOUND_MESSAGE =  "Not Found! Id: ";
-	
+		
 	@Transactional(readOnly = true)
 	public List<ClientDTO> findAll(){		
 		List<Client> list = repository.findAll();
@@ -61,6 +65,20 @@ public class ClientService {
 		
 	}
 	
+	// I've opted for throwing an exception even though it will hardly occur, once there is no associated class that would
+	// throw an integrity violation if deleted. 
+	public void delete(Long id) {
+		try {
+			repository.deleteById(id);
+		}
+		catch (EmptyResultDataAccessException e){
+			throw new ResourceNotFoundException(RESOURCE_NOT_FOUND_MESSAGE + id);		
+		}
+		catch (DataIntegrityViolationException e) {			
+			throw new DatabaseException(DATABASE_EXCEPTION_MESSAGE);		
+		}			
+	}
+	
 	private void clientDtoToClientEntity(ClientDTO dto, Client entity) {		
 		entity.setName(dto.getName());
 		entity.setCpf(dto.getCpf());
@@ -69,6 +87,8 @@ public class ClientService {
 		entity.setChildren(dto.getChildren());		
 		
 	}
+
+	
 
 	
 	
